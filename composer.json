@@ -34,8 +34,7 @@
     },
     "extra": {
         "laminas": {
-            "component": "Webinertia\\Session",
-            "config-provider": "Webinertia\\Session\\ConfigProvider"
+            "module": "Webinertia\\Session"
         }
     },
     "autoload": {
