@@ -20,7 +20,7 @@ class SessionManagerFactory implements FactoryInterface
 
         // $sessionConfig = ! empty($config['config_class']) ? new $config['config_class']() : new SessionConfig();
         // $sessionConfig->setOptions($config);
-        return new $requestedName(
+        return new SessionManager(
             $container->has(ConfigInterface::class) ? $container->get(ConfigInterface::class) : new SessionConfig()
         );
     }
