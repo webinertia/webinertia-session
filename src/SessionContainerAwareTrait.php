@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Webinertia\Session;
 
+use Laminas\Session\Container as LaminasContainer;
 use Webinertia\Session\Container;
 
 trait SessionContainerAwareTrait
 {
-    /** @var Container $sessionContainer */
+    /** @var Container|LaminasContainer $sessionContainer */
     protected $sessionContainer;
 
-    public function setSessionContainer(Container $container)
+    public function setSessionContainer(Container|LaminasContainer $container)
     {
         $this->sessionContainer = $container;
     }
