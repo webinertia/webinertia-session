@@ -9,32 +9,18 @@ use Laminas\Db\TableGateway\TableGateway;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Laminas\Session\SaveHandler\DbTableGateway;
 use Laminas\Session\SaveHandler\DbTableGatewayOptions;
-use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
-use Psr\Container\NotFoundExceptionInterface;
 
 final class SaveHandlerFactory implements FactoryInterface
 {
-    /**
-     * @param string $requestedName
-     * @param null|mixed[] $options
-     * @throws NotFoundExceptionInterface
-     * @throws ContainerExceptionInterface
-     */
+    /** @inheritdoc */
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): DbTableGateway
     {
-        $config = $container->get('config')['db'];
         // db options
-        $dbOptions = [
-            'idColumn'       => 'id',
-            'nameColumn'     => 'name',
-            'modifiedColumn' => 'modified',
-            'lifetimeColumn' => 'lifetime',
-            'dataColumn'     => 'data',
-        ];
+        $config = $container->get('config');
         return new DbTableGateway(
-            new TableGateway($config['sessions_table_name'], $container->get(AdapterInterface::class)),
-            new DbTableGatewayOptions($dbOptions)
+            new TableGateway($config['session_table_name'], $container->get(AdapterInterface::class)),
+            new DbTableGatewayOptions($config['session_save_handler_options'])
         );
     }
 }

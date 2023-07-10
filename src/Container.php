@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Webinertia\Session;
 
 use Laminas\Session\AbstractContainer;
+use Laminas\Session\ManagerInterface as Manager;
 
-class Container extends AbstractContainer
+final class Container extends AbstractContainer
 {
-    /** @var string $context */
-    protected $context;
+    public function __construct($name = 'App_Context', ?Manager $manager = null)
+    {
+        parent::__construct($name, $manager);
+    }
 }
